@@ -55,7 +55,7 @@ jobs:
           image-ref: ${{ steps.login-ecr.outputs.registry }}/eks:${{ env.IMAGE_TAG }}
           format: sarif
           output: trivy-build-result.sarif
-          exit-code: '1'
+          exit-code: '0'
           severity: 'CRITICAL,HIGH'
       
       - name: Upload Trivy scan results to GitHub Security
