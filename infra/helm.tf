@@ -49,11 +49,41 @@ resource "helm_release" "external_dns" {
 }
 
 resource "helm_release" "argo_cd_deployment" {
-  name             = "argo-cd"
+  name             = "argocd"
   repository       = "https://argoproj.github.io/argo-helm"
   chart            = "argo-cd"
-  create_namespace = true
   namespace        = "argocd"
+  create_namespace = true
 
-  values = [file("helm-values/argo-cd.yaml")]
+  values = [
+    file("helm-values/argo-cd.yaml")
+  ]
+
+  depends_on = [
+    helm_release.nginx_ingress,
+    helm_release.cert_manager,
+    helm_release.nginx_ingress
+  ]
+
+  timeout = 600
+}
+
+resource "helm_release" "kube_prometheus_stack" {
+  name             = "kube-prometheus-stack"
+  repository       = "https://prometheus-community.github.io/helm-charts"
+  chart            = "kube-prometheus-stack"
+  namespace        = "monitoring"
+  create_namespace = true
+
+  values = [
+    file("helm-values/monitoring.yaml")
+  ]
+
+  depends_on = [
+    helm_release.external_dns,
+    helm_release.cert_manager,
+    helm_release.nginx_ingress
+  ]
+
+  timeout = 1800
 }
