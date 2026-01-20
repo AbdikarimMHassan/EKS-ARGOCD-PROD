@@ -3,7 +3,7 @@ module "eks" {
   version = "~> 20.31"
 
   cluster_name    = local.name
-  cluster_version = "1.27"
+  cluster_version = "1.31"
 
   cluster_endpoint_public_access       = true
   cluster_endpoint_public_access_cidrs = [var.my_ip]
@@ -19,8 +19,8 @@ module "eks" {
     default = {
       min_size       = 1
       max_size       = 3
-      desired_size   = 1
-      instance_types = ["t3a.large", "t3.large"]
+      desired_size   = 2
+      instance_types = ["t3.medium"]
       disk_size      = 50
     }
   }
