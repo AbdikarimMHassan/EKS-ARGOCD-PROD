@@ -8,6 +8,8 @@ resource "helm_release" "nginx_ingress" {
   values = [
     file("helm-values/nginx-ingress.yaml")
   ]
+
+  depends_on = [module.eks]
 }
 
 resource "helm_release" "cert_manager" {
@@ -26,7 +28,7 @@ resource "helm_release" "cert_manager" {
     }
   ]
 
-  depends_on = [module.cert_manager_irsa]
+  depends_on = [module.cert_manager_irsa, module.eks]
 }
 
 resource "helm_release" "external_dns" {
@@ -45,7 +47,7 @@ resource "helm_release" "external_dns" {
     }
   ]
 
-  depends_on = [module.external_dns_irsa]
+  depends_on = [module.external_dns_irsa, module.eks]
 }
 
 resource "helm_release" "argo_cd_deployment" {
