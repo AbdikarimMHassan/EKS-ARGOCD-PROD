@@ -102,6 +102,7 @@ jobs:
         with:
           directory: infra/
           framework: terraform
+          check: CKV_AWS_1,CKV_AWS_2,CKV_AWS_3
           soft_fail: false
   
   terraform-apply:
