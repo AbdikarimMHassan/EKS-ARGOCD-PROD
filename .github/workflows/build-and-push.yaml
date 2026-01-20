@@ -5,7 +5,7 @@ on:
     paths:
       - 'apps/**'
       - 'docker/**'
-      - '.github/workflows/build-and-push.yaml'
+  
   workflow_dispatch:
 
 jobs:
