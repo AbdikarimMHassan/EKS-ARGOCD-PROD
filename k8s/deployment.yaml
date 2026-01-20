@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: threat-app
+  labels:
+    app: threat-app
+spec:
+  replicas: 3
+  selector: 
+    matchLabels:
+      app: threat-app
+  template:
+    metadata:
+      labels:
+        app: threat-app
+    spec:
+      containers:
+      - name: theat-app
+        image: 779846800049.dkr.ecr.eu-north-1.amazonaws.com/eks:v2
+        ports:
+        - containerPort: 3000
