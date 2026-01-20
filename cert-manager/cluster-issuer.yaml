@@ -1,0 +1,24 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: issuer
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: abdikarimmh98@gmail.com
+    privateKeySecretRef:
+      name: issuer
+    solvers:
+      - dns01:
+          route53:
+            region: eu-north-1
+            hostedZoneID: Z029486439Z81JOR5N4AF
+           
+            role: arn:aws:iam::779846800049:role/cert-manager
+            auth:
+              kubernetes:
+                serviceAccountRef:
+                  name: cert-manager
+        selector:
+          dnsZones:
+            - "eks.abdikarim-tech.com"
