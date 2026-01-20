@@ -3,3 +3,8 @@ variable "my_ip" {
   type        = string
 }
 
+variable "region" {
+  description = "AWS region"
+  type        = string
+  default     = "eu-north-1"
+}
