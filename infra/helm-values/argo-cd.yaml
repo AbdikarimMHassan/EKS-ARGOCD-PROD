@@ -1,18 +1,17 @@
 server:
   extraArgs:
     - --insecure
+  
   service:
     type: ClusterIP
+  
   ingress:
     enabled: true
-    ingressClassName: "nginx"
+    ingressClassName: nginx
     annotations:
-     nginx.org/hsts: "false"
-     cert-manager.io/cluster-issuer: "issuer"
-    hosts:
-      - host: argocd.eks.abdikarim-tech.com
+      cert-manager.io/cluster-issuer: "issuer"
+    hostname: argocd.eks.abdikarim-tech.com
     tls:
-      - secretName: argocd-ingress-tls
+      - secretName: argocd-tls
         hosts:
           - argocd.eks.abdikarim-tech.com
-
