@@ -58,13 +58,9 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
-        env:
-          AWS_REGION: ${{ env.AWS_REGION }}
 
       - name: Terraform Validate
         run: terraform validate
-        env:
-          AWS_REGION: ${{ env.AWS_REGION }}
   
   tflint:
     runs-on: ubuntu-latest
@@ -140,18 +136,12 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
-        env:
-          AWS_REGION: ${{ env.AWS_REGION }}
 
       - name: Terraform Plan
         run: terraform plan
-        env:
-          AWS_REGION: ${{ env.AWS_REGION }}
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
-        env:
-          AWS_REGION: ${{ env.AWS_REGION }}
 
       - name: Wait for EKS Cluster
         run: |
