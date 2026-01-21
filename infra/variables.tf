@@ -8,3 +8,8 @@ variable "region" {
   type        = string
   default     = "eu-north-1"
 }
+
+variable "terraform_deploy_arn" {
+  description = "allow access github actions access to cluster"
+  type        = string
+}
