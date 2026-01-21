@@ -1,3 +1,4 @@
+
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "~> 20.31"
@@ -26,8 +27,21 @@ module "eks" {
   }
 
   access_entries = {
+    # Admin User access to cluster
     admin = {
       principal_arn = "arn:aws:iam::779846800049:user/akarim"
+      policy_associations = {
+        admin = {
+          policy_arn = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+          access_scope = {
+            type = "cluster"
+          }
+        }
+      }
+    }
+    # Github Actions Role
+    ci_pipeline = {
+      principal_arn = var.terraform_deploy_arn
       policy_associations = {
         admin = {
           policy_arn = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
